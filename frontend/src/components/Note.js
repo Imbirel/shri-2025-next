@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DeleteNoteButton } from "./DeleteNoteButton";
 
 export const Note = function (props) {
@@ -7,7 +8,7 @@ export const Note = function (props) {
     <>
       <div>
         <div>
-          <span>{title}</span>
+          <Link href={`/note/${id}`}>{title}</Link>
           <DeleteNoteButton id={id} />
         </div>
         <p>{content}</p>

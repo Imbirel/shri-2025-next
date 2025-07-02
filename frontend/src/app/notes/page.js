@@ -1,10 +1,13 @@
+import { getNotes } from "@/api/note";
 import { Note } from "@/components/Note";
 
 export default async function NotesPage() {
-  const notes = await fetch("http://localhost:3001/notes");
+  const notes = await getNotes();
   return (
     <div>
-      <Note title="Title" content="content" />
+      {notes.map(({ id, ...note }) => (
+        <Note key={id} id={id} {...note} />
+      ))}
     </div>
   );
 }
