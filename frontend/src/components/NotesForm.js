@@ -1,6 +1,5 @@
 "use client";
 
-// import { useRouter } from "next/router";
 import { useState } from "react";
 import React from "react";
 
@@ -9,11 +8,9 @@ export const NotesForm = function NotesForm({ onAddNote }) {
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
   const [error, setError] = useState("");
-  // const router = useRouter()
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // router.push
 
     onAddNote({
       id: Math.random().toString(),
