@@ -1,5 +1,12 @@
 export async function getNotes() {
-  return (await fetch("http://localhost:3001/notes")).json();
+  return (
+    await fetch("http://localhost:3001/notes", {
+      cache: "force-cache",
+      next: {
+        tags: ["note"],
+      },
+    })
+  ).json();
 }
 
 export async function getTopNotes() {

@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createNote({ title, content }) {
@@ -17,5 +17,6 @@ export async function createNote({ title, content }) {
   });
 
   revalidatePath("/notes");
+  revalidateTag("note");
   redirect("/notes");
 }
