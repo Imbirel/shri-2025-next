@@ -1,16 +1,21 @@
 "use client";
 
 import { createNote } from "@/app/actions/createNote";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import React from "react";
 
 export const NotesForm = function NotesForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  if (isPending) {
+    return <div>waiting</div>;
+  }
 
   return (
-    <form action={createNote}>
+    <form>
       <input
         type="text"
         name="title"
@@ -32,7 +37,15 @@ export const NotesForm = function NotesForm() {
           setContent(event.target.value);
         }}
       />
-      <button type="submit">Добавить заметку</button>
+      <button
+        onClick={() =>
+          startTransition(async () => {
+            await createNote({ title, content });
+          })
+        }
+      >
+        Добавить заметку
+      </button>
     </form>
   );
 };
